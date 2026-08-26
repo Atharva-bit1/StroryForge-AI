@@ -1,175 +1,171 @@
-````markdown
-# AI StoryForge
+<div align="center">
 
-> A Memory-Augmented Multimodal AI Storytelling System
+# ✦ AI StoryForge
 
-AI StoryForge is an AI-powered storytelling platform that uses **Google Gemini** to generate personalized, context-aware stories based on user inputs, genres, and creative preferences.
+### A Memory-Augmented Multimodal AI Storytelling System
 
-## Features
+<p>
+  <i>Transform ideas into immersive, personalized stories with the power of Generative AI.</i>
+</p>
 
-- AI-powered story generation
-- Genre and story preference selection
-- Memory-augmented storytelling
-- Personalized user experience
-- Secure authentication
-- Asynchronous story generation
-- Persistent story storage
-- Modern responsive UI
-- Dockerized backend
+<br/>
 
-## Tech Stack
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" />
+<img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
+<img src="https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white" />
+<img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+<img src="https://img.shields.io/badge/Celery-37814A?style=for-the-badge&logo=celery&logoColor=white" />
+<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
 
-### Frontend
-- Next.js
-- React
-- Tailwind CSS
+<br/><br/>
 
-### Backend
-- Python
-- FastAPI
-- Celery
-- Redis
+<a href="#-features">Features</a>
+&nbsp; • &nbsp;
+<a href="#-architecture">Architecture</a>
+&nbsp; • &nbsp;
+<a href="#-tech-stack">Tech Stack</a>
+&nbsp; • &nbsp;
+<a href="#-installation">Installation</a>
+&nbsp; • &nbsp;
+<a href="#-roadmap">Roadmap</a>
 
-### AI
-- Google Gemini API
+</div>
 
-### Database
-- MongoDB
+---
 
-### Deployment
-- Docker
-- Docker Compose
+## ✦ About The Project
 
-## Architecture
+**AI StoryForge** is a memory-augmented AI storytelling platform designed to turn simple ideas into rich, personalized narratives.
+
+Users can provide a story concept, choose a genre, define creative preferences, and let **Google Gemini** transform their ideas into complete stories.
+
+The system combines:
+
+- 🧠 Memory-augmented context
+- ✨ Generative AI
+- ⚡ Asynchronous task processing
+- 🔐 User authentication
+- 💾 Persistent story storage
+- 🐳 Containerized deployment
+
+The goal is to create an intelligent storytelling experience where stories become more **personalized, contextual, and immersive** over time.
+
+---
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🧠 Memory-Augmented Storytelling
+
+Maintain relevant context and previous story information to generate more consistent and personalized narratives.
+
+</td>
+
+<td width="50%">
+
+### ✨ AI Story Generation
+
+Use Google's Gemini models to transform user ideas and creative preferences into complete stories.
+
+</td>
+</tr>
+
+<tr>
+<td width="50%">
+
+### ⚡ Async AI Processing
+
+Celery and Redis handle long-running AI generation tasks without blocking the main application.
+
+</td>
+
+<td width="50%">
+
+### 🔐 Authentication
+
+Secure user authentication allows users to maintain their own stories and personalized experience.
+
+</td>
+</tr>
+
+<tr>
+<td width="50%">
+
+### 💾 Persistent Storage
+
+MongoDB stores users, generated stories, preferences, and contextual information.
+
+</td>
+
+<td width="50%">
+
+### 🐳 Dockerized
+
+The backend infrastructure is containerized for consistent development and deployment.
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🎨 How It Works
 
 ```text
-User
- │
- ▼
-Next.js Frontend
- │
- ▼
-FastAPI Backend
- │
- ├── Authentication
- ├── Story Management
- └── AI Generation
-        │
-        ▼
-     Celery + Redis
-        │
-        ▼
-   Google Gemini API
-        │
-        ▼
-      MongoDB
-        │
-        ▼
- Generated Story
-````
-
-## Project Structure
-
-```text
-AI-StoryForge/
-│
-├── frontend/          # Next.js frontend
-│
-├── backend/           # FastAPI backend
-│   ├── app/
-│   ├── tasks/
-│   ├── models/
-│   └── ...
-│
-├── docker-compose.yml
-├── .env.example
-└── README.md
-```
-
-## How It Works
-
-1. User signs up or logs into the platform.
-2. User selects a genre and provides a story concept.
-3. The request is sent to the FastAPI backend.
-4. Celery places the story-generation task in the queue.
-5. Redis acts as the message broker.
-6. The task sends a structured prompt to Google Gemini.
-7. The generated story is stored in MongoDB.
-8. The frontend displays the generated story to the user.
-
-## Environment Variables
-
-Create a `.env` file and configure the required environment variables:
-
-```env
-GEMINI_API_KEY=your_gemini_api_key
-
-MONGO_URI=your_mongodb_connection_string
-
-REDIS_URL=redis://redis:6379/0
-
-SECRET_KEY=your_secret_key
-```
-
-## Running with Docker
-
-Clone the repository:
-
-```bash
-git clone https://github.com/your-username/AI-StoryForge.git
-cd AI-StoryForge
-```
-
-Start the application:
-
-```bash
-docker compose up --build
-```
-
-Stop the application:
-
-```bash
-docker compose down
-```
-
-## Development
-
-### Backend
-
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
-### Celery Worker
-
-```bash
-celery -A app.celery_app worker --loglevel=info
-```
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## Future Improvements
-
-* Multimodal story generation
-* AI-generated illustrations
-* Story continuation using memory
-* Character memory and persistent personalities
-* Voice narration
-* Story export to PDF
-* Advanced personalization
-* Multiple AI model support
-
-## License
-
-This project is currently developed for educational and research purposes.
-
-```
-```
+                    ┌──────────────────────┐
+                    │        USER          │
+                    │                      │
+                    │  Genre + Idea +      │
+                    │  Creative Preferences│
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    NEXT.JS FRONTEND  │
+                    │                      │
+                    │  Story Configuration │
+                    │  Authentication      │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    FASTAPI BACKEND   │
+                    │                      │
+                    │  API + Authentication│
+                    │  Story Management    │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    CELERY + REDIS    │
+                    │                      │
+                    │  Background Task     │
+                    │     Processing       │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    GOOGLE GEMINI     │
+                    │                      │
+                    │   AI Story Creation  │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │       MONGODB        │
+                    │                      │
+                    │ Users + Stories +    │
+                    │ Context + Memory     │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    GENERATED STORY   │
+                    │                      │
+                    │  Personalized AI     │
+                    │      Narrative       │
+                    └──────────────────────┘
