@@ -10,8 +10,8 @@ export default function Footer() {
           <p>Story worlds, generated and remembered.</p>
         </div>
         <div className="footer-links">
-          <a href="#signin">Sign In</a>
-          <a href="#signup">Sign Up</a>
+          <a href="signin">Sign In</a>
+          <a href="signup">Sign Up</a>
           <a href="#top">Back to top</a>
         </div>
       </div>
