@@ -115,7 +115,7 @@ The backend infrastructure is containerized for consistent development and deplo
 
 ## 🎨 How It Works
 
-```text
+````text
                     ┌──────────────────────┐
                     │        USER          │
                     │                      │
@@ -169,3 +169,48 @@ The backend infrastructure is containerized for consistent development and deplo
                     │  Personalized AI     │
                     │      Narrative       │
                     └──────────────────────┘
+---
+
+## 🧩 Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | Next.js + React |
+| **Styling** | Tailwind CSS |
+| **Backend** | Python + FastAPI |
+| **AI Engine** | Google Gemini API |
+| **Database** | MongoDB |
+| **Task Queue** | Celery |
+| **Message Broker** | Redis |
+| **Authentication** | JWT / Secure Authentication |
+| **Deployment** | Docker + Docker Compose |
+
+---
+
+## 📁 Project Structure
+
+```text
+AI-StoryForge/
+│
+├── frontend/
+│   ├── app/
+│   ├── components/
+│   ├── public/
+│   └── ...
+│
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── models/
+│   │   ├── services/
+│   │   ├── tasks/
+│   │   └── main.py
+│   │
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+├── docker-compose.yml
+├── .env.example
+├── .gitignore
+└── README.md
+````

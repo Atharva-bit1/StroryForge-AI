@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function Navbar({ signInHref = "#signin", signUpHref = "#signup" }) {
+export default function Navbar({ signInHref = "signin", signUpHref = "signup" }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
