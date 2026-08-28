@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 function Toggle({ checked, onChange, label }) {
   return (
@@ -52,14 +53,30 @@ export default function SettingsModal({ open, onClose }) {
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div className="settings-backdrop">
-      <div className="settings-modal" ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="settings-title">
+      <div
+        className="settings-modal"
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-title"
+      >
         <div className="settings-modal-head">
           <h2 id="settings-title">Settings</h2>
-          <button type="button" className="icon-btn settings-close-btn" onClick={onClose} aria-label="Close settings">
+          <button
+            type="button"
+            className="icon-btn settings-close-btn"
+            onClick={onClose}
+            aria-label="Close settings"
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
             </svg>
           </button>
         </div>
@@ -84,7 +101,11 @@ export default function SettingsModal({ open, onClose }) {
           <p className="settings-section-label">Appearance</p>
           <div className="settings-row">
             <span className="settings-row-label">Dark cinematic theme</span>
-            <Toggle checked={darkTheme} onChange={setDarkTheme} label="Dark cinematic theme" />
+            <Toggle
+              checked={darkTheme}
+              onChange={setDarkTheme}
+              label="Dark cinematic theme"
+            />
           </div>
         </div>
 
@@ -92,12 +113,18 @@ export default function SettingsModal({ open, onClose }) {
           <p className="settings-section-label">Notifications</p>
           <div className="settings-row">
             <span>
-              <span className="settings-row-label">Story generation notifications</span>
+              <span className="settings-row-label">
+                Story generation notifications
+              </span>
               <span className="settings-row-desc" style={{ display: "block" }}>
                 Get notified when a story finishes generating.
               </span>
             </span>
-            <Toggle checked={genNotifications} onChange={setGenNotifications} label="Story generation notifications" />
+            <Toggle
+              checked={genNotifications}
+              onChange={setGenNotifications}
+              label="Story generation notifications"
+            />
           </div>
         </div>
 
@@ -105,10 +132,15 @@ export default function SettingsModal({ open, onClose }) {
           <p className="settings-section-label">Preferences</p>
           <div className="settings-row">
             <span className="settings-row-label">Auto-play narration</span>
-            <Toggle checked={autoPlayNarration} onChange={setAutoPlayNarration} label="Auto-play narration" />
+            <Toggle
+              checked={autoPlayNarration}
+              onChange={setAutoPlayNarration}
+              label="Auto-play narration"
+            />
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
