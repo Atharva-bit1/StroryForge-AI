@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { HamburgerIcon, PlusIcon, SearchIcon, ClockHistoryIcon, ChevronLeftIcon, ChevronRightIcon } from "./dashboard-icons";
 import StoryHistoryItem from "./StoryHistoryItem";
-import { STORY_HISTORY } from "../data/dashboard";
 
-export default function DashboardSidebar() {
+export default function DashboardSidebar({ stories, currentStoryId, onSelectStory, onNewStory }) {
   const [collapsed, setCollapsed] = useState(false);
   const [query, setQuery] = useState("");
 
@@ -18,9 +17,11 @@ export default function DashboardSidebar() {
 
   const toggle = () => setCollapsed((c) => !c);
 
-  const filtered = query.trim()
-    ? STORY_HISTORY.filter((h) => h.title.toLowerCase().includes(query.trim().toLowerCase()))
-    : STORY_HISTORY;
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return stories;
+    return stories.filter((h) => h.title.toLowerCase().includes(q));
+  }, [stories, query]);
 
   return (
     <aside className={`dash-sidebar${collapsed ? " collapsed" : ""}`}>
@@ -37,23 +38,29 @@ export default function DashboardSidebar() {
 
       {collapsed ? (
         <div className="sidebar-rail">
-          <button className="icon-btn icon-btn-active" aria-label="New story" title="New Story">
+          <button className="icon-btn icon-btn-active" aria-label="New story" title="New Story" onClick={onNewStory}>
             <PlusIcon />
           </button>
-          <button className="icon-btn" aria-label="Search stories" title="Search">
+          <button className="icon-btn" aria-label="Search stories" title="Search" onClick={toggle}>
             <SearchIcon />
           </button>
-          <button className="icon-btn" aria-label="Story history" title="History Chats">
+          <button className="icon-btn" aria-label="Story history" title="History Chats" onClick={toggle}>
             <ClockHistoryIcon />
           </button>
           <div className="sidebar-rail-divider" />
-          {STORY_HISTORY.map((item) => (
-            <StoryHistoryItem key={item.id} item={item} collapsed />
+          {stories.map((item) => (
+            <StoryHistoryItem
+              key={item.id}
+              item={item}
+              collapsed
+              active={item.id === currentStoryId}
+              onSelect={onSelectStory}
+            />
           ))}
         </div>
       ) : (
         <>
-          <button className="sidebar-new-btn">
+          <button className="sidebar-new-btn" onClick={onNewStory}>
             <PlusIcon width={18} height={18} />
             <span>New Story</span>
           </button>
@@ -76,7 +83,12 @@ export default function DashboardSidebar() {
 
           <div className="sidebar-history-list">
             {filtered.map((item) => (
-              <StoryHistoryItem key={item.id} item={item} />
+              <StoryHistoryItem
+                key={item.id}
+                item={item}
+                active={item.id === currentStoryId}
+                onSelect={onSelectStory}
+              />
             ))}
             {filtered.length === 0 && <p className="sidebar-empty">No stories match &ldquo;{query}&rdquo;.</p>}
           </div>

@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { UserSilhouetteIcon } from "./dashboard-icons";
+import SettingsModal from "./SettingsModal";
 
 export default function ProfileButton() {
   const [open, setOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -14,6 +16,11 @@ export default function ProfileButton() {
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
+
+  const openSettings = () => {
+    setOpen(false);
+    setSettingsOpen(true);
+  };
 
   return (
     <div className="profile-menu" ref={ref}>
@@ -33,17 +40,19 @@ export default function ProfileButton() {
             <p className="profile-name">Story Weaver</p>
             <p className="profile-email">weaver@storyforge.ai</p>
           </div>
-          <a href="/dashboard" className="profile-item" role="menuitem">
+          <a href="/dashboard" className="profile-item" role="menuitem" onClick={() => setOpen(false)}>
             Your Stories
           </a>
-          <a href="#settings" className="profile-item" role="menuitem">
+          <button type="button" className="profile-item profile-item-btn" role="menuitem" onClick={openSettings}>
             Settings
-          </a>
+          </button>
           <a href="/signin" className="profile-item profile-item-danger" role="menuitem">
             Sign out
           </a>
         </div>
       )}
+
+      <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
   );
 }
