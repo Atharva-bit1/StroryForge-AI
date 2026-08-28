@@ -1,0 +1,32 @@
+services:
+
+  backend:
+    build: .
+    container_name: storyforge_backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - .:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  mongodb:
+    image: mongo:8
+    container_name: storyforge_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: storyforge_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongodb_data:

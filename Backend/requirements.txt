@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+pymongo
+python-dotenv
+email-validator
+argon2-cffi
+PyJWT
